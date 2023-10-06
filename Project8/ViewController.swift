@@ -52,18 +52,18 @@ class ViewController: UIViewController {
         let submit = UIButton(type: .system)
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle("SUBMIT", for: .normal)
-        submit.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
+        //submit.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         view.addSubview(submit)
         
         let clear = UIButton(type: .system)
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.setTitle("CLEAR", for: .normal)
-        clear.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
+        //clear.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         view.addSubview(clear)
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
-        buttonsView.backgroundColor = .green
+        //buttonsView.backgroundColor = .green
         view.addSubview(buttonsView)
         
         NSLayoutConstraint.activate([
@@ -98,9 +98,24 @@ class ViewController: UIViewController {
             buttonsView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor,constant: -20)
         ])
         
-        cluesLabel.backgroundColor = .red
-        answersLabel.backgroundColor = .green
-        currentAnswer.backgroundColor = .yellow
+        let width = 150
+        let height = 80
+        
+        for row in 0..<4{
+            for column in 0..<5 {
+                let letterButton = UIButton(type: .system)
+                letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+                letterButton.setTitle("WWW", for: .normal)
+                let frame = CGRect(x: column*width, y: row*height, width: width, height: height)
+                letterButton.frame = frame
+                buttonsView.addSubview(letterButton)
+                letterButtons.append(letterButton)
+            }
+        }
+        
+//        cluesLabel.backgroundColor = .red
+//        answersLabel.backgroundColor = .green
+//        currentAnswer.backgroundColor = .yellow
     }
 
     override func viewDidLoad() {
