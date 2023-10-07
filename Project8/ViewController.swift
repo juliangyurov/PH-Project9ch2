@@ -17,7 +17,11 @@ class ViewController: UIViewController {
     var activatedButons = [UIButton]()
     var solutions = [String]()
     
-    var score = 0
+    var score = 0 {
+        didSet{
+            scoreLabel.text = "Score: \(score)"
+        }
+    }
     var level = 1
     
     override func loadView() {
@@ -58,6 +62,8 @@ class ViewController: UIViewController {
         let submit = UIButton(type: .system)
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle("SUBMIT", for: .normal)
+//        submit.layer.borderWidth = 1
+//        submit.layer.borderColor = UIColor.lightGray.cgColor
         //submit.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         submit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
         view.addSubview(submit)
@@ -65,6 +71,8 @@ class ViewController: UIViewController {
         let clear = UIButton(type: .system)
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.setTitle("CLEAR", for: .normal)
+//        clear.layer.borderWidth = 1
+//        clear.layer.borderColor = UIColor.lightGray.cgColor
         //clear.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
         view.addSubview(clear)
@@ -115,8 +123,11 @@ class ViewController: UIViewController {
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
-                let frame = CGRect(x: column*width, y: row*height, width: width, height: height)
+                let frame = CGRect(x: column*width, y: row*height, width: width-3, height: height-3)
                 letterButton.frame = frame
+                
+                letterButton.layer.borderColor = UIColor.lightGray.cgColor
+                letterButton.layer.borderWidth = 1
                 buttonsView.addSubview(letterButton)
                 letterButtons.append(letterButton)
             }
@@ -153,7 +164,7 @@ class ViewController: UIViewController {
             
             currentAnswer.text = ""
             score += 1
-            scoreLabel.text = "Score: \(score)"
+            //scoreLabel.text = "Score: \(score)"
             
             if score % 7 == 0 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
