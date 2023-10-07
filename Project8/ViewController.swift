@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     var activatedButons = [UIButton]()
     var solutions = [String]()
+    var goodAnswers = 0
     
     var score = 0 {
         didSet{
@@ -164,8 +165,9 @@ class ViewController: UIViewController {
             currentAnswer.text = ""
             score += 1
             //scoreLabel.text = "Score: \(score)"
+            goodAnswers += 1
             
-            if score % 7 == 0 {
+            if goodAnswers  == 7 {
                 let ac = UIAlertController(title: "Well done!", message: "Are you ready for the next level?", preferredStyle: .alert)
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
@@ -174,6 +176,7 @@ class ViewController: UIViewController {
             let ac = UIAlertController(title: "Wrong answer !", message: "Try better next time !", preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
+            score -= 1
             clearTapped(UIButton())
         }
     }
@@ -184,6 +187,7 @@ class ViewController: UIViewController {
         if level == 0 {
             level = 1
         }
+        goodAnswers = 0
         solutions.removeAll(keepingCapacity: true)
         loadLevel()
         
