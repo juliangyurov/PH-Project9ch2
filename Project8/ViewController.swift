@@ -125,7 +125,6 @@ class ViewController: UIViewController {
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
                 let frame = CGRect(x: column*width, y: row*height, width: width-3, height: height-3)
                 letterButton.frame = frame
-                
                 letterButton.layer.borderColor = UIColor.lightGray.cgColor
                 letterButton.layer.borderWidth = 1
                 buttonsView.addSubview(letterButton)
@@ -171,6 +170,11 @@ class ViewController: UIViewController {
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        }else{
+            let ac = UIAlertController(title: "Wrong answer !", message: "Try better next time !", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+            clearTapped(UIButton())
         }
     }
     
