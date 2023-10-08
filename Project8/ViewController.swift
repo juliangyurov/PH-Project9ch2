@@ -63,8 +63,12 @@ class ViewController: UIViewController {
         let submit = UIButton(type: .system)
         submit.translatesAutoresizingMaskIntoConstraints = false
         submit.setTitle("SUBMIT", for: .normal)
-//        submit.layer.borderWidth = 1
-//        submit.layer.borderColor = UIColor.lightGray.cgColor
+        submit.layer.borderWidth = 1
+        submit.layer.borderColor = UIColor.lightGray.cgColor
+        //submit.layer.backgroundColor = UIColor.lightGray.cgColor
+        //submit.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 10.0, bottom: 10.0, trailing: 10.0)
+        submit.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        submit.layer.cornerRadius = 8
         //submit.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         submit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
         view.addSubview(submit)
@@ -72,8 +76,11 @@ class ViewController: UIViewController {
         let clear = UIButton(type: .system)
         clear.translatesAutoresizingMaskIntoConstraints = false
         clear.setTitle("CLEAR", for: .normal)
-//        clear.layer.borderWidth = 1
-//        clear.layer.borderColor = UIColor.lightGray.cgColor
+        clear.layer.borderWidth = 1
+        clear.layer.borderColor = UIColor.lightGray.cgColor
+        //clear.configuration?.contentInsets = NSDirectionalEdgeInsets(top: 5.0, leading: 5.0, bottom: 5.0, trailing: 5.0)
+        clear.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        clear.layer.cornerRadius = 8
         //clear.backgroundColor = UIColor(cgColor: CGColor(red: 1.5, green: 0.7, blue: 0.0, alpha: 1.0))
         clear.addTarget(self, action: #selector(clearTapped), for: .touchUpInside)
         view.addSubview(clear)
@@ -181,6 +188,14 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func clearTapped(_ sender: UIButton) {
+        currentAnswer.text = ""
+        for buton in activatedButons {
+            buton.isHidden = false
+        }
+        activatedButons.removeAll()
+    }
+    
     func levelUp(action: UIAlertAction) {
         level += 1
         level = level % 3
@@ -194,14 +209,6 @@ class ViewController: UIViewController {
         for button in letterButtons {
             button.isHidden = false
         }
-    }
-    
-    @objc func clearTapped(_ sender: UIButton) {
-        currentAnswer.text = ""
-        for buton in activatedButons {
-            buton.isHidden = false
-        }
-        activatedButons.removeAll()
     }
     
     func loadLevel() {
